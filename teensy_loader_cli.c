@@ -1045,19 +1045,20 @@ void die(const char *str, ...)
 
 static const struct {
 	const char *name;
+	const char *board_name;
 	int code_size;
 	int block_size;
 } MCUs[] = {
-	{"at90usb162",   15872,   128},
-	{"atmega32u4",   32256,   128},
-	{"at90usb646",   64512,   256},
-	{"at90usb1286", 130048,   256},
+	{"at90usb162",  "Teensy 1.0",       15872,   128},
+	{"atmega32u4",  "Teensy 2.0",       32256,   128},
+	{"at90usb646",  "Teensy++ 1.0",     64512,   256},
+	{"at90usb1286", "Teensy++ 2.0",     130048,  256},
 #if defined(USE_LIBUSB) || defined(USE_APPLE_IOKIT) || defined(USE_WIN32)
-	{"mkl26z64",     63488,   512},
-	{"mk20dx128",   131072,  1024},
-	{"mk20dx256",   262144,  1024},
-	{"mk66fx1m0",  1048576,  1024},
-	{"mk64fx512",   524288,  1024},
+	{"mkl26z64",    "Teensy LC",        63488,   512},
+	{"mk20dx128",   "Teensy 3.0",       131072,  1024},
+	{"mk20dx256",   "Teensy 3.1 & 3.2", 262144,  1024},
+	{"mk66fx1m0",   "Teensy 3.6",       1048576, 1024},
+	{"mk64fx512",   "Teensy 3.5",       524288,  1024},
 #endif
 	{NULL, 0, 0},
 };
@@ -1068,7 +1069,7 @@ void list_mcus()
 	int i;
 	printf("Supported MCUs are:\n");
 	for(i=0; MCUs[i].name != NULL; i++)
-		printf(" - %s\n", MCUs[i].name);
+		printf(" - %s: %s\n", MCUs[i].name, MCUs[i].board_name);
 	exit(1);
 }
 
